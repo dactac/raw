@@ -20,7 +20,9 @@
     // For each record in the dataset a pie chart abstraction is created.
     // Records are grouped according the 'group' variable.
 
-    model.map(function(data) {
+    model.map(function(data,dimensionInstances) {
+
+      var [ group, dimensions ] = d3.range(2).map(key=>dimensionInstances.get(key))
 
         // Check if dimensions are set.
         // In theory should be not necessary, to be fixed.
@@ -98,7 +100,8 @@
 
     // Drawing function.
 
-    chart.draw(function(selection, data) {
+    chart.draw(function(selection, data, options) {
+      var [width, columns, padding, donut, thickness, showValues, sortChartsBy, sortArcsBy, colors] = d3.range(9).map(key=>options.get(key))
 
         var radius = +width() / +columns() / 2 - +padding() / 2;
 

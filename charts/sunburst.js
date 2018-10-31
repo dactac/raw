@@ -17,7 +17,8 @@
     var colors = chart.color()
         .title("Color scale");
 
-    chart.draw((selection, data) => {
+    chart.draw((selection, data, options) => {
+      var [ diameter, colors] = d3.range(2).map(key=>options.get(key))
 
         var radius = +diameter() / 2;
 

@@ -230,7 +230,7 @@
 						<div class="col-lg-9 col-md-8">
 								<div class="row">
 									<div class="col-lg-3 col-md-4 col-sm-4 col-xs-6" ng-repeat="c in charts">
-										<div ng-class="{selected: c == chart}" class="layout"  ng-click="selectChart(c)">
+										<div ng-class="{selected: c == chart.factory}" class="layout"  ng-click="selectChart(c)">
 											<div class="layout-thumb" ng-style="{'background-image':'url(' + c.thumbnail() + ')'}"></div>
 											<p class="layout-inner" >
 												<span class="layout-title">{{c.title()}}</span>

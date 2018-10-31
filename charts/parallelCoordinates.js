@@ -11,9 +11,10 @@
 	var color = model.dimension()
 		.title("Color");
 
-	model.map(data => {
-		if(!list()) return;
-		return data.map(d => {
+	model.map((data,dimensions) => {
+    var list = dimensions.get(0);
+    if(!list()) return;
+    return data.map(d => {
 			var obj = {
 				dimensions: {},
 				color: color(d)
@@ -45,7 +46,8 @@
 	var colors = chart.color()
 		.title("Color scale");
 
-	chart.draw((selection, data) => {
+	chart.draw((selection, data, options) => {
+    var [width, height, colors] = d3.range(3).map(key=>options.get(key))
 
 		var m = [30, 40, 10, 40],
 			w = +width() - m[1] - m[3],

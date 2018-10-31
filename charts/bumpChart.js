@@ -17,7 +17,10 @@
 		.title('Size')
 		.types(Number)
 
-	stream.map(function(data) {
+	stream.map(function(data, dimensions) {
+
+    var [group, date, size] = d3.range(3).map(key=>dimensions.get(key))
+
 		if (!group()) return [];
 
 		var keys = d3.set(data.map(function(d) { return group(d); })).values();
@@ -112,7 +115,11 @@
 	var colors = chart.color()
 		.title("Color scale")
 
-	chart.draw(function(selection, data) {
+	chart.draw(function(selection, data, options) {
+
+    var [
+      width, height, padding, normalize, sort, curve, showLabels, colors
+    ] = d3.range(8).map(key=>options.get(key));
 
 		var g = selection
 			.attr("width", +width())

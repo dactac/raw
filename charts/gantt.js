@@ -4,11 +4,11 @@
     var timechuncks = raw.model();
 
     // Groups. It defines how to aggregate thte data
-    var group = timechuncks.dimension('groups')
+    var group = timechuncks.dimension()
         .title('Groups')
 
     // Start Date. It will define the starting point of each bar
-    var startDate = timechuncks.dimension('startDate')
+    var startDate = timechuncks.dimension()
         .title('Start date')
         .types(Date)
         .accessor(function(d) {
@@ -17,7 +17,7 @@
         .required(true)
 
     // End Date. It will define the ending point of each bar
-    var endDate = timechuncks.dimension('endDate')
+    var endDate = timechuncks.dimension()
         .title('End date')
         .types(Date)
         .accessor(function(d) {
@@ -26,14 +26,16 @@
         .required(true)
 
     // Colors. it defines the color of each bar.
-    var colorDimension = timechuncks.dimension('color')
+    var colorDimension = timechuncks.dimension()
         .title('Colors')
         .types(String)
 
     // Mapping function
     // For each record in the data returns the values
     // for the X and Y dimensions and casts them as numbers
-    timechuncks.map(function(data) {
+    timechuncks.map(function(data, dimensions) {
+
+      var [ group, startDate, endDate, colorDimension ] = d3.range(4).map(key=>dimensions.get(key));
 
         var level = id = 0;
 
@@ -123,7 +125,9 @@
         .title("Color scale")
 
     // Drawing function
-    chart.draw(function(selection, data) {
+    chart.draw(function(selection, data, options) {
+
+      var [ width, height, marginLeft, alignment, sort, colors ] = d3.range(6).map(key=>options.get(key));
 
         // svg size, create container group
         var g = selection

@@ -32,7 +32,10 @@
 		return [radius * Math.cos(angle), radius * Math.sin(angle)];
 	}
 
-	chart.draw((selection, data) => {
+	chart.draw((selection, data, options) => {
+
+    var diameter = options.get(0);
+
 		var g = selection
 			.attr("width", +diameter())
 			.attr("height", +diameter())

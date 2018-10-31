@@ -87,7 +87,9 @@
 		return new CurveSankey(context);
 	}
 
-	chart.draw(function(selection, data) {
+	chart.draw(function(selection, data, options) {
+
+    var [width, height, padding, scale, bands, curve, sorting, colors] = d3.range(8).map(key=>options.get(key));
 
 		//define colors
 		colors.domain(['Negative', 'Positive']);

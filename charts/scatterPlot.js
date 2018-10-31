@@ -39,8 +39,16 @@
         .title("show points")
         .defaultValue(true);
 
-    chart.draw((selection, data) => {
+    chart.draw((selection, data, options, points) => {
 
+      var [ width,
+        height,
+        marginLeft ,
+        maxRadius ,
+        useZero ,
+        colors ,
+        showPoints ] = d3.range(7).map(key=>options.get(key));
+        
         // Retrieving dimensions from model
         var x = points.dimensions().get('x'),
             y = points.dimensions().get('y');

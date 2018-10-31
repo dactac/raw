@@ -15,7 +15,9 @@
         .title('Colors')
         .types(Number, String)
 
-    model.map(function(data) {
+    model.map(function(data, dimensions) {
+
+      var [ group, values, colorsDimension ] = d3.range(3).map(key => dimensions.get(key) )
 
         var remap = data.map(function(d){
             return {
@@ -65,8 +67,11 @@
     	.title("Color scale")
 
 
-    chart.draw(function(selection, data) {
+    chart.draw(function(selection, data, options) {
 
+      var [
+        width, height, marginLeft, barWidth, iqrValue, colors
+       ] = d3.range(6).map(key=>options.get(key));
 
         var chartMargin = {
                 top: 20,

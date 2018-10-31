@@ -35,8 +35,12 @@
     var colors = chart.color()
         .title("Color scale");
 
-    chart.draw((selection, data) => {
+    chart.draw((selection, data, options) => {
 
+      var [
+        width, height, nodeWidth, opacity, sortBy, colors, 
+       ] = d3.range(6).map(key=>options.get(key));
+       
         // get the drawing area
         var g = selection
             .attr("width", +width())

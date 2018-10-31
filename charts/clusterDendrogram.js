@@ -30,7 +30,9 @@
 			" " + d.parent.y + "," + d.parent.x;
 	}
 
-	chart.draw((selection, data) => {
+	chart.draw((selection, data, options) => {
+   
+    var [width, height] = d3.range(2).map(key=>options.get(key));
 
 		var g = selection
 			.attr("width", +width())

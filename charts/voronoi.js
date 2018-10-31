@@ -29,7 +29,8 @@
 		.title("Show points")
 		.defaultValue(true)
 
-	chart.draw(function(selection, data) {
+	chart.draw(function(selection, data, options) {
+    var [ width, height, colors, showPoints ] = d3.range(4).map(key=>options.get(key))
 
 		var x = d3.scaleLinear().range([0, +width()]).domain(d3.extent(data, function(d) { return d.x; })),
 			y = d3.scaleLinear().range([+height(), 0]).domain(d3.extent(data, function(d) { return d.y; }));

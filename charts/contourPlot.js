@@ -48,11 +48,13 @@
         .title("Show points")
         .defaultValue(true)
 
-    chart.draw(function(selection, data) {
+    chart.draw(function(selection, data, options, model) {
+
+      var [ width, height, marginLeft, bandwidth, colorMode, useZero, colors, showPoints ] = d3.range(8).map(key=>options.get(key));
 
         // Retrieving dimensions from model
-        var x = points.dimensions().get('x'),
-            y = points.dimensions().get('y');
+        var x = model.dimensions().get('x'),
+            y = model.dimensions().get('y');
 
         var g = selection
             .attr("width", +width())

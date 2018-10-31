@@ -26,7 +26,8 @@
 	var colors = chart.color()
 		.title("Color scale")
 
-	chart.draw(function(selection, data) {
+	chart.draw(function(selection, data, options) {
+    var [ width, height, padding, colors] = d3.range(4).map(key=>options.get(key))
 
 		//unknown function
 		var format = d3.format(",d");

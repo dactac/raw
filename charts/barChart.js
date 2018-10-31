@@ -35,7 +35,9 @@
     // Mapping function
     // For each record in the data returns the values
     // for the X and Y dimensions and casts them as numbers
-    model.map(function(data) {
+    model.map(function(data, dimensions) {
+
+        var [categories, sizes, groups, colorsDimesion] = d3.range(4).map(key=>dimensions.get(key));
 
         var results = d3.nest()
             .key(function(d) {
@@ -115,8 +117,13 @@
     // selection represents the d3 selection (svg)
     // data is not the original set of records
     // but the result of the model map function
-    chart.draw(function(selection, data) {
+    chart.draw(function(selection, data, options, model) {
 
+      var [
+        width, height, marginLeft, padding, xPadding, sameScale, colors
+       ] = d3.range(7).map(key=>options.get(key));
+
+      var groups = model.dimensions().get(3);
         // Define margins
         var margin = {
             top: 0,

@@ -35,7 +35,9 @@
     var labels = model.dimension()
         .title('Labels')
 
-    model.map(function(data) {
+    model.map(function(data, dimensions) {
+
+        var [groups,values,radiuses,colorsDimesion,labels] = d3.range(5).map( key => dimensions.get(key));
 
         var results = d3.nest()
             .key(function(d) {
@@ -114,7 +116,13 @@
     // selection represents the d3 selection (svg)
     // data is not the original set of records
     // but the result of the model map function
-    chart.draw(function(selection, data) {
+    chart.draw(function(selection, data, options, model) {
+
+        var [groups, values] = d3.range(2).map(key=>model.dimensions().get(key));
+
+        var [
+          width, height, anticollisionIterations, marginCircles, padding, minRadius, maxRadius, sorting, colors 
+        ] = d3.range(9).map( key=>options.get(key) );
 
         //sort data
         function sortBy(a, b) {

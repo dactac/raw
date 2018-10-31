@@ -30,7 +30,9 @@
 		.title("Show labels")
 		.defaultValue(true)
 
-	chart.draw(function(selection, data) {
+	chart.draw(function(selection, data, options) {
+
+    var [diameter, padding, sort, colors, showLabels] = d3.range(5).map(key=>options.get(key))
 
 		if (!data.children.length) return;
 

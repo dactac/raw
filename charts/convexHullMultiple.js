@@ -23,7 +23,9 @@
 
     var mgroup = model.dimension().title('Group')
 
-    model.map(data => {
+    model.map((data, dimensions) => {
+
+      var [mx, my, mlabel, mgroup] = d3.range(4).map(key=>dimensions.get(key));
 
         var nest = d3.nest()
             .key(mgroup)
@@ -81,7 +83,10 @@
     var colors = chart.color()
         .title("Color scale");
 
-    chart.draw((selection, data) => {
+    chart.draw((selection, data, options, model) => {
+
+        var mlabel = model.dimensions().get(2);
+        var [width, height, marginLeft, dotRadius, useZero, stroke, colors] = d3.range(7).map(key=>options.get(key))
 
         var xmin = d3.min(data, layer => {
             return d3.min(layer.value, d => {
